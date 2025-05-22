@@ -1,83 +1,62 @@
-<h2 class="heading">Government Schemes</h2>
-<button id="show-states-btn" class="apply-btn mb-4">See Schemes from Your State</button>
-<div id="states-container" class="grid-container" style="display: none;">
-    <!-- Add states -->
-    <div class="state-box" data-state="Maharashtra">Maharashtra</div>
-    <div class="state-box" data-state="Gujarat">Gujarat</div>
-    <div class="state-box" data-state="Punjab">Punjab</div>
-    <div class="state-box" data-state="Haryana">Haryana</div>
-    <div class="state-box" data-state="Karnataka">Karnataka</div>
-    <div class="state-box" data-state="Uttar Pradesh">Uttar Pradesh</div>
-    <!-- Add more states as needed -->
-</div>
-<!-- Schemes will be loaded here -->
-<div id="schemes-container" class="mt-4"></div>
-
 <div class="scheme-list">
+    <!-- Static Scheme 1 -->
     <div class="scheme-card">
         <h3>PM-Kisan Yojana</h3>
         <p>This scheme provides income support of ₹6,000 per year to all landholding farmer families in India, payable in three equal installments.</p>
         <a href="https://pmkisan.gov.in/" class="apply-btn" target="_blank">Apply</a>
+        <button class="details-btn apply-btn mt-2">Show Details</button>
+        <div class="details-section" style="display: none; margin-top: 10px;">
+            <p><strong>How to Apply:</strong> Visit the PM-Kisan portal, log in with Aadhaar-linked credentials, and submit the landholding documents.</p>
+            <iframe width="100%" height="200" src="https://www.youtube.com/embed/eaD5iRiTh94?si=dnHHTbyXeT2P5Wis" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
 
+    <!-- Static Scheme 2 -->
     <div class="scheme-card">
         <h3>Soil Health Card Scheme</h3>
         <p>Helps farmers understand the fertility status of their soil and recommends appropriate nutrients to improve productivity sustainably.</p>
         <a href="https://soilhealth.dac.gov.in/" class="apply-btn" target="_blank">Apply</a>
-    </div>
-
-    <div class="scheme-card">
-        <h3>Pradhan Mantri Fasal Bima Yojana (PMFBY)</h3>
-        <p>Crop insurance scheme to protect farmers against crop failure due to natural calamities, pests, and diseases.</p>
-        <a href="https://pmfby.gov.in/" class="apply-btn" target="_blank">Apply</a>
-    </div>
-
-    <div class="scheme-card">
-        <h3>Kisan Credit Card (KCC)</h3>
-        <p>Offers short-term credit to farmers to meet their agriculture and allied needs with flexible repayment options and low interest.</p>
-        <a href="https://www.pmkisan.gov.in/Documents/KCC.pdf" class="apply-btn" target="_blank">Apply</a>
+        <button class="details-btn apply-btn mt-2">Show Details</button>
+        <div class="details-section" style="display: none; margin-top: 10px;">
+            <p><strong>How to Apply:</strong> Submit a soil sample at the nearest Kisan Center or register through the Soil Health Card portal.</p>
+            <iframe width="100%" height="200" src="https://www.youtube.com/embed/SFKz_aEFfZw?si=yPGaZNgsRgYtynbU" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
 </div>
 
+<div class="scheme-card">
+    <h3>Pradhan Mantri Fasal Bima Yojana (PMFBY)</h3>
+    <p>Crop insurance scheme to protect farmers against crop failure due to natural calamities, pests, and diseases.</p>
+    <a href=" https://pmfby.gov.in" class="apply-btn" target="_blank">Apply</a>
+    <button class="details-btn apply-btn mt-2">Show Details</button>
+    <div class="details-section" style="display: none; margin-top: 10px;">
+        <p><strong>How to Apply:</strong> You can apply for the PMFBY scheme online through the official portal [https://pmfby.gov.in](https://pmfby.gov.in) or at your nearest CSC/agriculture department office.</p>
+        <iframe width="100%" height="200" src="https://www.youtube.com/embed/gU_nZH1MJBc?si=-B2eaDWFWyXYW2Xa" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+</div>
 
+<div class="scheme-card">
+    <h3>Kisan Credit Card (KCC)</h3>
+    <p>Offers short-term credit to farmers to meet their agriculture and allied needs with flexible repayment options and low interest.</p>
+    <a href="
+    " class="apply-btn" target="_blank">Apply</a>
+    <button class="details-btn apply-btn mt-2">Show Details</button>
+    <div class="details-section" style="display: none; margin-top: 10px;">
+        <p><strong>How to Apply:</strong>Apply online via your bank's KCC portal or visit the nearest branch with Aadhaar, land records, and a passport-size photo.</p>
+        <iframe width="100%" height="200" src="https://www.youtube.com/embed/k766_q17tOA?si=UHIZw2cHOEX5Z_6z" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+</div>
+
+<!-- CSS Styling -->
 <style>
-    
-    .heading {
-        color: #4CAF50;
-        font-size: 28px;
-        margin-bottom: 20px;
-        text-align: center;
-
-    }
-    
-    
-
-    .search-input {
-        margin-top: 20px;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid #e0e0e0;
-        font-size: 16px;
-    }
-    #schemeContainer {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 24px;
-        margin-top: 30px;
-    }
-
     .scheme-card {
-        border: 1px solid #e0e0e0;
+        margin-bottom: 20px;
         padding: 20px;
+        background: #fff;
         border-radius: 12px;
-        background-color: #ffffff;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .scheme-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     .scheme-card h3 {
@@ -90,18 +69,18 @@
         color: #555;
         font-size: 15px;
         line-height: 1.5;
-        margin-bottom: 12px;
     }
 
     .apply-btn {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        text-decoration: none;
         display: inline-block;
         margin-top: 10px;
-        padding: 10px 16px;
-        background-color: #4CAF50;
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: 500;
         transition: background-color 0.3s ease;
     }
 
@@ -109,98 +88,28 @@
         background-color: #388e3c;
     }
 
-    @media (max-width: 768px) {
-        #schemeContainer {
-            grid-template-columns: 1fr;
-        }
-    }
-    .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
-}
-.state-box {
-    padding: 10px;
-    border: 2px solid green;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: 0.3s ease;
-}
-.state-box:hover {
-    background-color: #f0f0f0;
-}
-.scheme-box {
-    border: 1px solid #ddd;
-    padding: 12px;
-    border-radius: 6px;
-    background-color: #f9f9f9;
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 1rem;
-        margin: 20px 0;
+    .mt-2 {
+        margin-top: 0.5rem;
     }
 
-    .state-box {
-        padding: 15px;
-        border: 2px solid #4CAF50;
-        text-align: center;
-        cursor: pointer;
-        border-radius: 8px;
-        transition: 0.3s ease;
-        background-color: white;
+    .details-section {
+        border-top: 1px dashed #ccc;
+        padding-top: 10px;
     }
-
-    .state-box:hover {
-        background-color: #4CAF50;
-        color: white;
-    }
-
-    .mb-4 {
-        margin-bottom: 1.5rem;
-    }
-}
-
-
- 
 </style>
 
+<!-- JavaScript for Toggle Functionality -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Show states grid when button is clicked
-        document.getElementById("show-states-btn").addEventListener("click", function() {
-            const statesContainer = document.getElementById("states-container");
-            if (statesContainer.style.display === "none") {
-                statesContainer.style.display = "grid";
+    document.addEventListener("click", function (e) {
+        if (e.target && e.target.classList.contains("details-btn")) {
+            const details = e.target.nextElementSibling;
+            if (details.style.display === "none" || details.style.display === "") {
+                details.style.display = "block";
+                e.target.textContent = "Hide Details";
             } else {
-                statesContainer.style.display = "none";
+                details.style.display = "none";
+                e.target.textContent = "Show Details";
             }
-        });
-
-        // Add click event for state boxes
-        document.querySelectorAll(".state-box").forEach(function(box) {
-            box.addEventListener("click", function() {
-                const selectedState = this.dataset.state;
-                fetch(`/get-state-schemes/${selectedState}/`)
-                    .then(response => response.json())
-                    .then(schemes => {
-                        const schemesContainer = document.getElementById("schemes-container");
-                        schemesContainer.innerHTML = ''; // Clear existing content
-                        
-                        schemes.forEach(scheme => {
-                            const schemeCard = `
-                                <div class="scheme-card">
-                                    <h3>${scheme.title}</h3>
-                                    <p>${scheme.description}</p>
-                                    <a href="${scheme.apply_link}" class="apply-btn" target="_blank">Apply</a>
-                                </div>
-                            `;
-                            schemesContainer.innerHTML += schemeCard;
-                        });
-                    })
-                    .catch(error => console.error('Error:', error));
-            });
-        });
+        }
     });
 </script>
