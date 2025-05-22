@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 style="margin-bottom: 20px;">Registered Users</h2>
+
+<table border="1" style="width: 100%; border-collapse: collapse; text-align: left;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="padding: 8px;">ID</th>
+            <th style="padding: 8px;">Username</th>
+            <th style="padding: 8px;">Full Name</th>
+            <th style="padding: 8px;">Email</th>
+            <th style="padding: 8px;">Phone</th>
+            <th style="padding: 8px;">Date Joined</th>
+            <th style="padding: 8px;">Is Admin</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td style="padding: 8px;">{{ user.id }}</td>
+            <td style="padding: 8px;">{{ user.username }}</td>
+            <td style="padding: 8px;">{{ user.full_name }}</td>
+            <td style="padding: 8px;">{{ user.email }}</td>
+            <td style="padding: 8px;">{{ user.phone_number }}</td>
+            <td style="padding: 8px;">{{ user.date_joined }}</td>
+            <td style="padding: 8px;">{{ user.is_superuser }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

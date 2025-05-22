@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home - Agro Analytics{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <video autoplay muted loop id="bg-video">
+        <source src="{% static 'videos/bgvideo.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="container hero-content">
+        <h2>Welcome to <span class="brand-name">Agro Analytics</span></h2>
+        <p>Your one-stop solution for smart farming insights.</p>
+        <a href="{% url 'about' %}" class="btn-learn-more">Learn More</a>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <h3>Our Features</h3>
+        <div class="feature-grid">
+            <div class="feature">
+                <h4>Government Schemes</h4>
+                <p>Stay updated with the latest agricultural policies and benefits.</p>
+            </div>
+            <div class="feature">
+                <h4>Crop Disease Analysis</h4>
+                <p>Analyze plant diseases and get recommendations.</p>
+            </div>
+            <div class="feature">
+                <h4>Organic Farming</h4>
+                <p>Learn about sustainable farming practices.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Hero section with full screen video background */
+    .hero {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+    }
+
+    #bg-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        opacity: 0.6;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        background-color: rgba(0, 100, 0, 0.5);
+        padding: 30px;
+        border-radius: 20px;
+    }
+
+    .hero-content h2 {
+        font-size: 3em;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .hero-content .brand-name {
+        color: #caffbf;
+    }
+
+    .hero-content p {
+        font-size: 1.4em;
+        margin-bottom: 20px;
+    }
+
+    .btn-learn-more {
+        padding: 12px 30px;
+        background: #ffeb3b;
+        color: #333;
+        font-weight: bold;
+        border-radius: 30px;
+        text-decoration: none;
+        font-size: 1em;
+        transition: 0.3s ease;
+    }
+
+    .btn-learn-more:hover {
+        background: #ffc107;
+        color: #000;
+    }
+
+    /* Features Section */
+    .features {
+        padding: 60px 20px;
+        background-color: #e2eabc;
+        text-align: center;
+    }
+
+    .features h3 {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 2em;
+        color: #181c18;
+        margin-bottom: 30px;
+    }
+
+    .feature-grid {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .feature {
+        background: linear-gradient(145deg, #c6fcbc, #ffffff);
+        border-radius: 20px;
+        padding: 30px 25px;
+        width: 280px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+        transition: all 0.3s ease;
+        border: 1px solid #545554;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        background: linear-gradient(145deg, #ffffff, #ecf9e6);
+    }
+
+    .feature h4 {
+        font-size: 1.5em;
+        color: #2e7d32;
+        font-weight: 600;
+        margin-bottom: 12px;
+        position: relative;
+    }
+
+    .feature h4::after {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        content: '';
+        width: 40px;
+        height: 3px;
+        background-color: #7ed182;
+        position: absolute;
+        left: 50%;
+        bottom: -8px;
+        transform: translateX(-50%);
+        border-radius: 5px;
+    }
+
+    .feature p {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 1em;
+        color: #272727;
+        margin-top: 20px;
+        line-height: 1.6;
+    }
+</style>
+{% endblock %}

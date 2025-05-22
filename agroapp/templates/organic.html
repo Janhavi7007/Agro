@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Farming</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            color: #2d6a4f;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        select {
+            display: block;
+            margin: 0 auto 30px auto;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 2px solid #556b2f;
+            background-color: #4a6613; /* olive green */
+            color: white;
+            min-width: 250px;
+            cursor: pointer;
+        }
+
+        select option {
+            background-color: white;
+            color: black;
+        }
+
+        #categoryContent {
+    display: none;
+    background: linear-gradient(135deg, #e9f5ec, #7bd17b); /* two-shade background */
+    border: 4px solid #2d6a4f; /* bold border */
+    border-radius: 12px;
+    padding: 25px;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #222;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+
+        .info-section {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .info-section label {
+            display: block;
+            font-weight: bold;
+            color: #2d6a4f;
+            margin-bottom: 5px;
+            font-size: 17px;
+        }
+
+        .info-section p {
+            font-size: 16px;
+            color: #333;
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .image-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image-section label {
+            display: block;
+            font-weight: bold;
+            color: #2d6a4f;
+            margin-bottom: 10px;
+            font-size: 17px;
+        }
+
+        #categoryTitle {
+            text-align: center;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: 300;
+            font-size: 22px;
+            color: #186743;
+            margin-bottom: 10px;
+        }
+
+        #categoryImage {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #2d6a4f;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Organic Farming Categories</h1>
+
+    <!-- Category Dropdown -->
+    <select id="categoryDropdown">
+        <option value="">Select Category</option>
+        {% for category in categories %}
+            <option value="{{ category.slug }}">{{ category.title }}</option>
+        {% endfor %}
+    </select>
+
+    <!-- Dynamic Content Display -->
+    <div id="categoryContent">
+        <div id="categoryTitle"></div>
+
+        <div class="image-section">
+            <label>Image:</label>
+            <img id="categoryImage" src="" alt="">
+        </div>
+
+        <div class="info-section">
+            <label>Description:</label>
+            <p id="categoryDescription"></p>
+        </div>
+
+        <div class="info-section">
+            <label>Benefits:</label>
+            <p id="categoryBenefits"></p>
+        </div>
+    </div>
+
+    <!-- AJAX Script -->
+    <script>
+        $(document).ready(function() {
+            $('#categoryDropdown').change(function() {
+                var categorySlug = $(this).val();
+                if (categorySlug) {
+                    $.ajax({
+                        url: '/get_farming_category/' + categorySlug + '/',
+                        method: 'GET',
+                        success: function(data) {
+                            if (data.error) {
+                                alert(data.error);
+                            } else {
+                                $('#categoryTitle').text("Title: " + data.title);
+                                $('#categoryImage').attr('src', data.image_url);
+                                $('#categoryDescription').text(data.description);
+                                $('#categoryBenefits').text(data.benefits);
+                                $('#categoryContent').fadeIn();
+                                $('#categoryContent')[0].scrollIntoView({ behavior: "smooth" });
+                            }
+                        },
+                        error: function() {
+                            alert('Error loading category');
+                        }
+                    });
+                } else {
+                    $('#categoryContent').fadeOut();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+/* Hide Django's default help text */
+.helptext {
+    display: none;
+}
+
+/* Signup form container */
+.signup-container {
+    max-width: 400px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Signup form heading */
+.signup-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Form labels */
+.signup-form label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Input fields */
+.signup-form input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Submit button */
+.signup-form button {
+    width: 100%;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Hover effect for button */
+.signup-form button:hover {
+    background: linear-gradient(45deg, #FFA500, #FF4500);
+}
+
+/* Login link styling */
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-link a {
+    color: #FF4500;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}

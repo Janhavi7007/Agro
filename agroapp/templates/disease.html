@@ -1,0 +1,101 @@
+{% load static %}
+
+<div style="font-family: Arial, sans-serif;">
+
+    <style>
+        .detection-section {
+            background: url("{% static 'images/plant.jpg' %}") no-repeat center center;
+            background-size: cover;
+            background-position: center;
+            padding: 60px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .steps-box {
+            background: linear-gradient(135deg, #91e7b2, #34857b); /* Two-color gradient */
+            padding: 40px 50px;
+            max-width: 1000px;
+            width: 95%;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .steps-box h3 {
+            text-align: center;
+            color: #2e7d32;
+            margin-bottom: 25px;
+            font-size: 26px;
+        }
+
+        .steps-box p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .detect-button {
+            padding: 14px 30px;
+            font-size: 20px;
+            background-color: rgb(23, 116, 23);
+            color: rgb(209, 228, 227);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .detect-button:hover {
+            background-color: rgb(72, 140, 72);
+            color: #ffffff;
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .detection-section h2 {
+            color: white;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+    </style>
+
+    <div class="detection-section">
+
+        <h2>Plant Disease Detection</h2>
+
+        <!-- Steps Box Container -->
+        <div class="steps-box">
+            <h3>🌿 Easy Steps to Detect Plant Disease from an Image</h3>
+
+            <p><strong>✅ Step 1: Upload a Plant Image</strong><br>
+                Take a clear photo of the affected plant or leaf using your phone or camera. Then upload it using the button below.</p>
+
+            <p><strong>✅ Step 2: Image is Sent to the Server</strong><br>
+                Once submitted, your image is sent to a computer system that uses AI to examine it.</p>
+
+            <p><strong>✅ Step 3: AI Analyzes the Image</strong><br>
+                The smart system looks for signs of disease like spots, discoloration, dryness, or unusual textures.</p>
+
+            <p><strong>✅ Step 4: Disease is Identified</strong><br>
+                The AI compares your image with known disease patterns and identifies the most likely match.</p>
+
+            <p><strong>✅ Step 5: Result is Shown to You</strong><br>
+                You'll see the disease name, details about it, and suggested treatments to help your plant recover.</p>
+        </div>
+
+        <!-- Disease Detector Button -->
+        <a href="http://localhost:8501" target="_self">
+            <button class="detect-button">
+                Open Disease Detector
+            </button>
+        </a>
+    </div>
+</div>
+
+

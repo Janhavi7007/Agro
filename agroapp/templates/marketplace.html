@@ -1,0 +1,149 @@
+{% block style %}
+<style>
+    body {
+        background: #fffaf2; /* Soft warm background */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2.text-success {
+        text-align: center;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+        font-size: 3rem;
+        color: #2e7d32; /* Vibrant green */
+    }
+
+    .market-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ensure boxes fit into the screen */
+        gap: 1.5rem;
+        max-width: 90%; /* Limit the grid container's max width */
+        margin: 0 auto; /* Center the grid */
+        padding: 0 10px; /* Prevent overflow */
+    }
+
+    .market-card {
+        border-radius: 1.5rem;
+        border: 3px solid transparent;
+        background: linear-gradient(to bottom right, #fdf6e3, #e0f7fa); /* Yellow to light blue */
+        padding: 1.2rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        position: relative;
+        background-clip: padding-box;
+    }
+
+    .market-card::before {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
+        z-index: -1;
+        background: linear-gradient(45deg, #49a7d0, #d1fe3c); /* Blue to Orange border */
+        border-radius: 1.8rem;
+    }
+
+    .market-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    .market-card h5 {
+        font-size: 1.25rem;
+        color: #1565c0; /* Blue title */
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .market-card p {
+        margin: 0.2rem 0;
+        font-size: 0.95rem;
+        color: #3e3e3e;
+    }
+
+    #loading {
+        font-weight: 500;
+        font-size: 1.1rem;
+        color: #f57c00; /* Deep orange */
+    }
+
+    .alert {
+        font-size: 1rem;
+        background: #fff3cd;
+        border-left: 5px solid #ffa000;
+        color: #7a4100;
+        padding: 0.75rem 1rem;
+        border-radius: 0.75rem;
+    }
+</style>
+
+
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h2 class="text-success">Nearby Markets</h2>
+        <div id="loading" class="text-center mb-3">Fetching your location...</div>
+    </div>
+    <div id="market-list" class="market-grid"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function initApp() {
+        document.getElementById("loading").textContent = "Fetching your location...";
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(getNearbyMarkets, handleLocationError);
+        } else {
+            document.getElementById("loading").textContent = "Geolocation not supported by your browser.";
+        }
+    }
+
+    function getNearbyMarkets(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        fetch(`/get_nearby_markets/?lat=${lat}&lon=${lon}`)
+            .then(response => response.json())
+            .then(data => {
+                const marketList = document.getElementById("market-list");
+                const loading = document.getElementById("loading");
+                loading.style.display = "none";
+                marketList.innerHTML = "";
+
+                if (data.error) {
+                    marketList.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+                    console.log(data.response);
+                } else {
+                    data.forEach(market => {
+                        const marketCard = `
+                            <div class="market-card">
+                                <h5>${market.name}</h5>
+                                <p><strong>Distance:</strong> ${market.distance}</p>
+                                <p><strong>Estimated Time:</strong> ${market.duration}</p>
+                            </div>
+                        `;
+                        marketList.innerHTML += marketCard;
+                    });
+                }
+            })
+            .catch(error => {
+                document.getElementById("loading").textContent = "Error fetching market data.";
+                console.error(error);
+            });
+    }
+
+    function handleLocationError(error) {
+        document.getElementById("loading").textContent = "Location access denied or not available.";
+    }
+
+    window.onload = initApp;
+</script>
+
+{% endblock %}

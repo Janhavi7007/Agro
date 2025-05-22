@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f4f4f4;
+        color: #333;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: url("{% static 'images/download (2).jpg' %}") no-repeat center center/cover;
+        opacity: 0.8;
+        z-index: -1;
+    }
+
+    header {
+        height: 80px;
+        background-color: gray;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 30px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .about-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        padding: 120px 30px 40px;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .about-box {
+        opacity: 0.7;
+        background: #ffffff;
+        border-left: 5px solid #66bb6a;
+        padding: 20px;
+        border-radius: 12px;
+        display: flex;
+        align-items: flex-start;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    .about-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-box img {
+        width: 60px;
+        height: 60px;
+        border-radius: 8px;
+        margin-right: 15px;
+        object-fit: cover;
+    }
+
+    .about-box .content h2 {
+        font-size: 18px;
+        color: #145717;
+        margin-bottom: 8px;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+    }
+
+    .about-box .content p {
+        font-size: 14px;
+        color: #222222;
+        line-height: 1.6;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    @media screen and (max-width: 600px) {
+        header {
+            flex-direction: column;
+            height: auto;
+            padding: 10px 20px;
+        }
+
+        .about-box {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .about-box img {
+            margin: 0 auto 10px;
+        }
+    }
+</style>
+
+
+<section class="about-container">
+    <!-- Same content as before -->
+    <div class="about-box">
+        <img src="{% static 'images/organic farming.png' %}" alt="Sustainable Farming">
+        <div class="content">
+            <h2>🌱 Sustainable Organic Farming</h2>
+            <p>Promoting eco-friendly and organic farming techniques for sustainable growth.</p>
+        </div>
+    </div>
+    <div class="about-box">
+        <img src="{% static 'images/fresh vegetables1.png' %}" alt="Fresh Vegetables">
+        <div class="content">
+            <h2>🌿 Fresh Vegetables</h2>
+            <p>Connecting farmers directly with consumers, eliminating middlemen.</p>
+        </div>
+    </div>
+    <div class="about-box">
+        <img src="{% static 'images/direct consumer.png' %}" alt="Direct Sales">
+        <div class="content">
+            <h2>👨‍🌾 Direct Farmer to Consumer Sales</h2>
+            <p>Ensuring fair pricing and direct transactions for farmers and buyers.</p>
+        </div>
+    </div>
+    <div class="about-box">
+        <img src="{% static 'images/goverment scheme.png' %}" alt="Government Schemes">
+        <div class="content">
+            <h2>📚 Government Schemes</h2>
+            <p>Providing access to various government schemes and subsidies.</p>
+        </div>
+    </div>
+    <div class="about-box">
+        <img src="{% static 'images/crop analysis.png' %}" alt="AI Crop Analysis">
+        <div class="content">
+            <h2>🤖 AI-Powered Crop Analysis</h2>
+            <p>Using AI to analyze crop health, detect diseases, and optimize yields.</p>
+        </div>
+    </div>
+    <div class="about-box">
+        <img src="{% static 'images/agri category.jpeg' %}" alt="Categories of Agriculture">
+        <div class="content">
+            <h2>🌾 Agriculture Knowledge Hub</h2>
+            <p>Apiculture, Sericulture, Bio-Pesticides, Mushroom Cultivation, Goat Rearing, Fish Rearing, Poultry Farming, Cattle Rearing, Food Processing</p>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+

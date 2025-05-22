@@ -1,0 +1,320 @@
+{% load static %}
+{% block content %}
+
+<style>
+    /* Layout & Fonts */
+    .dashboard-container {
+        display: flex;
+        min-height: 100vh;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f8fff0;
+        position: relative;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        background-color: #238e3c;
+        padding: 20px;
+        width: 250px;
+        height: 100vh;
+        color: white;
+    }
+
+    .sidebar h3 {
+        text-align: center;
+        color: #ecfdf5;
+    }
+
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sidebar a {
+        font-family: revert;
+        display: block;
+        background-color: #9bef95;
+        margin: 10px 0;
+        padding: 15px;
+        border-radius: 12px;
+        color: #2b652e;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+        background-color: #b9fbc0;
+        transform: scale(1.02);
+    }
+
+    .logout-btn {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: 600;
+        margin-top: 20px;
+        width: 100%;
+        padding: 12px;
+        background-color: #91bb86;
+        color: rgb(35, 32, 32);
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .logout-btn:hover {
+        background-color: #dde8dd;
+    }
+
+    /* Main Content */
+    .dashboard-content {
+        flex: 1;
+        padding: 30px;
+        position: relative;
+    }
+
+    /* Profile Circle */
+    .profile-circle {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background-color: #238e3c;
+        color: white;
+        font-weight: bold;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* User Profile Box */
+    #user-profile-box {
+        display: none;
+        position: fixed;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        background: linear-gradient(to bottom, #f0fff4, #dcedc8);
+        padding: 25px;
+        border: 3px solid #4b7d4b;
+        border-radius: 15px;
+        margin-top: 80px;
+        max-width: 600px;
+        z-index: 10;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-header {
+        text-align: center;
+    }
+
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+        background-color: #9ab973;
+        color: white;
+        font-weight: bold;
+        font-size: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+    }
+
+    .update-buttons {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    .update-buttons button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 50 px;
+        background-color: #5a8d5a;
+        color: white;
+        cursor: pointer;
+        margin-bottom: 25px;
+    }
+    
+
+    .update-box {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #eefce6;
+        border-radius: 10px;
+        display: none;
+    }
+
+    .update-box input {
+        padding: 8px;
+        margin: 5px 0;
+        width: 100%;
+        border: 1px solid #aaa;
+        border-radius: 5px;
+    }
+
+    .update-box button {
+        margin-top: 10px;
+        padding: 8px 15px;
+        background-color: #4b7d4b;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .messages-section {
+        margin-top: 20px;
+    }
+
+    .messages-section div {
+        border: 1px solid #ccc;
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    .json-pre {
+        background-color: #ecfdf5;
+        color: #064e3b;
+        padding: 20px;
+        border-radius: 12px;
+        font-family: Consolas, monospace;
+        font-size: 14px;
+        border: 1px solid #34d399;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        white-space: pre-wrap;
+        overflow-x: auto;
+        margin-top: 20px;
+    }
+</style>
+
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3> {{ user.full_name }}</h3>
+        <ul>
+            <li><a href="#" class="load-section" data-url="{% url 'schemes' %}">Government Schemes 🏛️</a></li>
+            <li><a href="#" class="load-section" data-url="{% url 'disease' %}">Plant Disease Prediction 🌿</a></li>
+            <li><a href="#" class="load-section" data-url="{% url 'weather' %}">Weather Forecast 🌦️</a></li>
+            <li><a href="#" class="load-section" data-url="{% url 'organic' %}">Organic Farming 🌱</a></li>
+            <li><a href="#" class="load-section" data-url="{% url 'agriculture_news' %}">Agri News 📢</a></li>
+            <li><a href="#" class="load-section" data-url="{% url 'agro_business_list' %}">Business Ideas 💡</a></li>
+            <li><a href="{% url 'submit_feedback' %}">Feedback Form 💡</a></li>
+            <li><a href="{% url 'marketplace' %}">Marketplace 🛒</a></li>
+        </ul>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div class="dashboard-content">
+        <!-- Profile Circle -->
+        <div id="profile-circle" class="profile-circle" onclick="toggleUserProfile()">
+            {{ user.full_name|first|upper }}
+        </div>
+
+        <!-- User Profile Box -->
+        <div id="user-profile-box">
+            <div class="profile-header">
+                <div class="profile-avatar">{{ user.full_name|first|upper }}</div>
+                <h3>{{ user.full_name }}</h3>
+                <p>Email: {{ user.email }}</p>
+                <p>Phone: {{ user.phone_number }}</p>
+            </div>
+
+            <div class="update-buttons">
+                <button onclick="toggleBox('email-box')">Change Email</button>
+                <button onclick="toggleBox('password-box')">Change Password</button>
+                <button onclick="toggleBox('phone-box')">Change Phone</button>
+            </div>
+
+            <div id="email-box" class="update-box">
+                <form method="POST" action="{% url 'update_email' %}">
+                    {% csrf_token %}
+                    <input type="email" name="new_email" placeholder="New Email" required>
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+
+            <div id="password-box" class="update-box">
+                <form method="POST" action="{% url 'update_password' %}">
+                    {% csrf_token %}
+                    <input type="password" name="current_password" placeholder="Current Password" required>
+                    <input type="password" name="new_password" placeholder="New Password" required>
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+
+            <div id="phone-box" class="update-box">
+                <form method="POST" action="{% url 'update_phone' %}">
+                    {% csrf_token %}
+                    <input type="text" name="new_phone" placeholder="New Phone Number" required>
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+
+            <div class="messages-section">
+                <h4>Messages</h4>
+                <div>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p>No messages from admin.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Inner Content -->
+        <div id="dashboard-content">
+            <h2>Welcome to Agro Analytics!</h2>
+            <p>Select an option from the left menu.</p>
+           
+            <div id="detail-container"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(".load-section").click(function (e) {
+        e.preventDefault();
+        const url = $(this).data("url");
+        $("#dashboard-content").load(url);
+    });
+
+    function toggleUserProfile() {
+        const box = document.getElementById("user-profile-box");
+        box.style.display = box.style.display === "none" ? "block" : "none";
+    }
+
+    function toggleBox(id) {
+        document.querySelectorAll(".update-box").forEach(box => box.style.display = "none");
+        document.getElementById(id).style.display = "block";
+    }
+
+    // JSON Viewer for Agro Business
+    document.addEventListener("click", function (e) {
+        if (e.target.classList.contains("view-detail-btn")) {
+            const id = e.target.dataset.id;
+            fetch(`/agro-business/${id}/`)
+                .then(response => response.json())
+                .then(data => {
+                    const formatted = JSON.stringify(data, null, 4);
+                    document.getElementById("detail-container").innerHTML =
+                        `<pre class="json-pre">${formatted}</pre>`;
+                    document.getElementById("detail-container").scrollIntoView({ behavior: "smooth" });
+                });
+        }
+    });
+</script>
+
+{% endblock %}

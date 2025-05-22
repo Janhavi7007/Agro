@@ -1,0 +1,97 @@
+
+{% load static %}
+
+{% block content %}
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Background for full page */
+    .weather-section {
+        background: url("{% static 'images/weather.jpg' %}") no-repeat center center;
+        background-size: cover;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .weather-container {
+        max-width: 600px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        color: #333;
+    }
+
+    .weather-container h3 {
+        margin-bottom: 20px;
+    }
+
+    .weather-container p {
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    .weather-container i {
+        margin-right: 8px;
+        color: #2e8b57;
+    }
+</style>
+
+
+<div class="weather-section">
+    <div class="weather-container">
+        <h2>Current Weather Forecast</h2>
+        <div id="weatherData"></div>
+    </div>
+</div>
+
+<script>
+    const apiKey = "{{ api_key }}";
+    console.log("✅ Frontend using API Key:", apiKey);
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getWeather);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+
+    function getWeather(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`)
+            .then(res => res.json())
+            .then(data => {
+                const temp = data.main.temp;
+                const humidity = data.main.humidity;
+                const wind = data.wind.speed;
+                const location = data.name;
+                const condition = data.weather[0].description;
+
+                document.getElementById("weatherData").innerHTML = `
+                    <h3>Weather in ${location}</h3>
+                    <p><i class="fas fa-cloud"></i><strong>Condition:</strong> ${condition}</p>
+                    <p><i class="fas fa-thermometer-half"></i><strong>Temperature:</strong> ${temp} °C</p>
+                    <p><i class="fas fa-tint"></i><strong>Humidity:</strong> ${humidity}%</p>
+                    <p><i class="fas fa-wind"></i><strong>Wind Speed:</strong> ${wind} m/s</p>
+                `;
+            })
+            .catch(err => {
+                console.error("Error fetching weather:", err);
+                alert("Failed to get weather data.");
+            });
+    }
+</script>
+{% endblock %}

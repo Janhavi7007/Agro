@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: agro-analytics
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn agro_analytics.wsgi
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: agro_analytics.settings
+      - key: PYTHON_VERSION
+        value: 3.11
+
+  

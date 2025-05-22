@@ -1,0 +1,16 @@
+<!-- templates/partials/state_schemes.html -->
+
+{% if schemes %}
+    <h4>Schemes for {{ schemes.0.state }}</h4>
+    <div class="grid-container">
+        {% for scheme in schemes %}
+            <div class="scheme-box">
+                <h5>{{ scheme.title }}</h5>
+                <p>{{ scheme.description }}</p>
+                <a href="{{ scheme.apply_link }}" target="_blank">Apply Here</a>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No schemes available for this state.</p>
+{% endif %}

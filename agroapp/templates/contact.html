@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .contact-page {
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .contact-heading {
+        text-align: center;
+        font-size: 2em;
+        color: #38761d;
+        margin-bottom: 30px;
+    }
+
+    .contact-container {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+    }
+
+    .left-column {
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .meet-us-box {
+        padding: 30px;
+        border: 2px solid #38761d;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 0 0 4px #d9ead3;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .map-container {
+        height: 250px;
+        border: 1px solid #414040;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #eee;
+    }
+
+    .contact-form-section {
+        width: 55%;
+        padding: 20px;
+        border: 2px solid #38761d;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 0 4px #d9ead3;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-form-section form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact-form-section div {
+        margin-bottom: 15px;
+    }
+
+    .contact-form-section label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .contact-form-section input[type="text"],
+    .contact-form-section input[type="email"],
+    .contact-form-section textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .contact-form-section textarea {
+        resize: vertical;
+    }
+
+    .contact-form-section button[type="submit"] {
+        background-color: #38761d;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: fit-content;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .message-success {
+        text-align: center;
+        color: green;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+</style>
+
+<div class="contact-page">
+    <h2 class="contact-heading">Contact Us</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message-success">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="contact-container">
+        <!-- Left Column -->
+        <div class="left-column">
+            <div class="meet-us-box">
+                <h3>Meet Us</h3>
+                <p>We’d love to see you at our office!</p>
+                <p>Trinity Academy Of Engineering, Pune 411048</p>
+            </div>
+
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3785.387192224778!2d73.90482229999999!3d18.420721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c058396c3aa3%3A0xda785dfcd808849f!2sTrinity%20Academy%20of%20Engineering!5e0!3m2!1sen!2sin!4v1745404765549!5m2!1sen!2sin" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Right Column: Contact Form -->
+        <div class="contact-form-section">
+            <form method="POST" action="{% url 'submit_contact' %}">
+                {% csrf_token %}
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
