@@ -116,7 +116,7 @@ import requests
 from django.shortcuts import render
 
 def agriculture_news(request):
-    api_key = '890637d3fe1b4201bd8391235c1eb5e4'
+    api_key = 'your-API-Key'
     url = f'https://newsapi.org/v2/everything?q=agriculture+india&sortBy=publishedAt&language=en&apiKey={api_key}'
 
     response = requests.get(url)
@@ -139,8 +139,8 @@ def get_nearby_markets(request):
     lat = request.GET.get('lat')
     lon = request.GET.get('lon')
 
-    PLACES_API_KEY = 'AIzaSyATY3fJp8NEmUo0-MtpwuZDs-KyS5pKqHg'
-    DISTANCE_API_KEY = 'AIzaSyCvsjmf00GHyqKBVpUciY89FhzMDj0ZJTc'
+    PLACES_API_KEY = 'your api key'
+    DISTANCE_API_KEY = 'your api key'
 
     try:
         # Fetch nearby places (supermarkets) from Google Places API
